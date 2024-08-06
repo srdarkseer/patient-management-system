@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { IoIosArrowDropright } from "react-icons/io";
 
 const RecentAssessments: React.FC = () => {
@@ -12,9 +13,9 @@ const RecentAssessments: React.FC = () => {
     <div className="mt-6 p-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold">Recent assessments</h2>
-        <a href="#" className="text-sm text-blue-600 hover:underline">
+        <Link href="#" className="text-sm text-blue-600 hover:underline">
           See more →
-        </a>
+        </Link>
       </div>
       <div className="mt-4 space-y-4">
         {assessment &&

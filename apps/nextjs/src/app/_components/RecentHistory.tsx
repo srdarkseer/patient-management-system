@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { IoIosArrowDropright } from "react-icons/io";
 
@@ -22,9 +23,9 @@ const RecentHistory: React.FC = () => {
     <div className="p-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-bold">Recent history</h2>
-        <a href="#" className="text-sm text-blue-600 hover:underline">
+        <Link href="#" className="text-sm text-blue-600 hover:underline">
           See more →
-        </a>
+        </Link>
       </div>
       <div className="mt-4 space-y-4">
         {history &&

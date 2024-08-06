@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   AiOutlineClose,
   AiOutlineMenu,
@@ -27,11 +27,10 @@ const Sidebar = ({
   isOpen: boolean;
   toggleSidebar: () => void;
 }) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   const handleSignOut = () => {
     sessionStorage.clear();
-    router.push("/login");
   };
 
   const menuItems = [
@@ -63,22 +62,31 @@ const Sidebar = ({
       </div>
 
       <div className={`flex-1 ${isOpen ? "flex-col" : "justify-center"}`}>
-        {menuItems.map(({ href, icon: Icon, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`flex py-4 ${
-              isOpen ? "justify-start pl-4" : "justify-center"
-            } w-full items-center transition duration-300 hover:bg-gray-200 focus:outline-none`}
-          >
-            <Icon className="text-gray-600" />
-            {isOpen && (
-              <span className="pl-2 text-sm font-medium text-gray-800">
-                {label}
-              </span>
-            )}
-          </Link>
-        ))}
+        {menuItems.map(({ href, icon: Icon, label }) => {
+          const isActive = pathname === href;
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex py-4 ${
+                isOpen ? "justify-start pl-4" : "justify-center"
+              } w-full items-center transition duration-300 hover:bg-gray-200 focus:outline-none ${
+                isActive ? "bg-gray-100 text-orange-700" : ""
+              }`}
+            >
+              <Icon
+                className={`text-gray-600 ${isActive ? "text-orange-700" : ""}`}
+              />
+              {isOpen && (
+                <span
+                  className={`pl-2 text-sm font-medium ${isActive ? "text-orange-700" : "text-gray-800"}`}
+                >
+                  {label}
+                </span>
+              )}
+            </Link>
+          );
+        })}
       </div>
 
       <div className="absolute bottom-4 flex w-full flex-col gap-10">
@@ -87,7 +95,7 @@ const Sidebar = ({
             <div
               className={`flex w-full ${
                 isOpen ? "justify-between" : "justify-center"
-              } first-letter: cursor-pointer items-center px-4 py-2 transition duration-300 hover:bg-gray-200`}
+              } cursor-pointer items-center px-4 py-2 transition duration-300 hover:bg-gray-200`}
             >
               <div className="flex items-center space-x-2">
                 <img
