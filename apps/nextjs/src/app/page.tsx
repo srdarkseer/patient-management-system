@@ -1,12 +1,7 @@
-import { Suspense } from "react";
-
+import { Button } from "~/components/ui/button";
 import { api, HydrateClient } from "~/trpc/server";
-import { AuthShowcase } from "./_components/auth-showcase";
-import {
-  CreatePostForm,
-  PostCardSkeleton,
-  PostList,
-} from "./_components/posts";
+import RecentAssessments from "./_components/RecentAssessment";
+import RecentHistory from "./_components/RecentHistory";
 
 export const runtime = "edge";
 
@@ -16,28 +11,34 @@ export default function HomePage() {
 
   return (
     <HydrateClient>
-      <main className="container h-screen py-16">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-primary">T3</span> Turbo
-          </h1>
-          <AuthShowcase />
-
-          <CreatePostForm />
-          <div className="w-full max-w-2xl overflow-y-scroll">
-            <Suspense
-              fallback={
-                <div className="flex w-full flex-col gap-4">
-                  <PostCardSkeleton />
-                  <PostCardSkeleton />
-                  <PostCardSkeleton />
-                </div>
-              }
-            >
-              <PostList />
-            </Suspense>
+      <main className="px-2 py-1">
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center space-x-3">
+            <img
+              src="https://github.com/shadcn.png"
+              alt="User Avatar"
+              className="h-12 w-12 rounded-full"
+            />
+            <div>
+              <p className="text-sm text-slate-500">Welcome Back</p>
+              <p className="text-lg font-bold">Dr. Johnson</p>
+            </div>
+          </div>
+          <div className="flex flex-col items-end">
+            <p className="text-sm">Monday</p>
+            <p className="text-base font-medium">16 April, 2024</p>
           </div>
         </div>
+
+        <div className="flex justify-end p-4">
+          <Button variant={"default"} size={"lg"}>
+            + New assessment
+          </Button>
+        </div>
+
+        <RecentHistory />
+
+        <RecentAssessments />
       </main>
     </HydrateClient>
   );
