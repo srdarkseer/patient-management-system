@@ -6,44 +6,39 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Picker } from "@react-native-picker/picker";
+
+import CustomDropdown from "../_components/CustomDropdown";
 
 const NewAssessment: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [cognitiveStatus, setCognitiveStatus] = useState("");
   const [measures, setMeasures] = useState("");
   const [patient, setPatient] = useState("");
 
+  const cognitiveOptions = [
+    { label: "Cognition", value: "cognition" },
+    // Add more options here
+  ];
+
+  const measuresOptions = [
+    { label: "SLUMS", value: "slums" },
+    // Add more options here
+  ];
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>New assessment</Text>
-      <View style={styles.field}>
-        <Text style={styles.label}>Cognitive status</Text>
-        <View style={styles.pickerContainer}>
-          <Picker
-            selectedValue={cognitiveStatus}
-            onValueChange={(itemValue) => setCognitiveStatus(itemValue)}
-            style={styles.picker}
-          >
-            <Picker.Item label="Select cognitive status" value="" />
-            <Picker.Item label="Cognition" value="cognition" />
-            {/* Add more options here */}
-          </Picker>
-        </View>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.label}>Applicable measures</Text>
-        <View style={styles.pickerContainer}>
-          <Picker
-            selectedValue={measures}
-            onValueChange={(itemValue) => setMeasures(itemValue)}
-            style={styles.picker}
-          >
-            <Picker.Item label="Select applicable measures" value="" />
-            <Picker.Item label="SLUMS" value="slums" />
-            {/* Add more options here */}
-          </Picker>
-        </View>
-      </View>
+      <CustomDropdown
+        label="Cognitive status"
+        selectedValue={cognitiveStatus}
+        options={cognitiveOptions}
+        onValueChange={setCognitiveStatus}
+      />
+      <CustomDropdown
+        label="Applicable measures"
+        selectedValue={measures}
+        options={measuresOptions}
+        onValueChange={setMeasures}
+      />
       <View style={styles.field}>
         <Text style={styles.label}>Patient</Text>
         <TextInput
@@ -81,14 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#6b7280",
     marginBottom: 8,
-  },
-  pickerContainer: {
-    backgroundColor: "#fff",
-    borderRadius: 8,
-    elevation: 2,
-  },
-  picker: {
-    height: 50,
   },
   input: {
     backgroundColor: "#fff",
