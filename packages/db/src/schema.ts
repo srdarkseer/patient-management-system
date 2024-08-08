@@ -1,6 +1,8 @@
 import { relations, sql } from "drizzle-orm";
 import {
+  date,
   integer,
+  json,
   pgTable,
   primaryKey,
   text,
@@ -90,3 +92,50 @@ export const Session = pgTable("session", {
 export const SessionRelations = relations(Session, ({ one }) => ({
   user: one(User, { fields: [Session.userId], references: [User.id] }),
 }));
+
+export const Patient = pgTable("patient", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  fullName: varchar("fullName", { length: 255 }).notNull(),
+  gender: varchar("gender", { length: 10 }).notNull(),
+  phoneNumber: varchar("phoneNumber", { length: 15 }).notNull(),
+  dateOfBirth: date("dateOfBirth").notNull(),
+  age: integer("age").notNull(),
+  address: varchar("address", { length: 255 }).notNull(),
+  // doctorId: uuid("doctorId")
+  //   .notNull()
+  //   .references(() => User.id, { onDelete: "cascade" }),
+});
+
+export const CreatePatientSchema = createInsertSchema(Patient, {
+  fullName: z.string().max(255),
+  gender: z.string().max(10),
+  phoneNumber: z.string().max(15),
+  dateOfBirth: z.date(),
+  age: z.number(),
+  address: z.string().max(255),
+  // doctorId: z.string().uuid(),
+}).omit({
+  id: true,
+});
+
+export const Assessment = pgTable("assessment", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  assessmentType: varchar("assessmentType", { length: 255 }).notNull(),
+  patientId: uuid("patientId")
+    .notNull()
+    .references(() => Patient.id, { onDelete: "cascade" }),
+  assessmentDate: date("assessmentDate").notNull(),
+  questionsAndAnswers: json("questionsAndAnswers").notNull(),
+  finalScore: integer("finalScore").notNull(),
+});
+
+// Create the schema for inserting a new Assessment
+export const CreateAssessmentSchema = createInsertSchema(Assessment, {
+  assessmentType: z.string().max(255),
+  patientId: z.string().uuid(),
+  assessmentDate: z.date(),
+  questionsAndAnswers: z.object({}).passthrough(), // Assuming questionsAndAnswers is a JSON object
+  finalScore: z.number(),
+}).omit({
+  id: true,
+});
