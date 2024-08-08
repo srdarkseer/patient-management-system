@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BsFilter, BsSearch } from "react-icons/bs";
+
+// import { BsFilter, BsSearch } from "react-icons/bs";
 
 const historyData = [
   {
@@ -68,7 +69,7 @@ const HistoryScreen: React.FC = () => {
         <Text style={styles.headerText}>History</Text>
       </View>
       <View style={styles.searchContainer}>
-        <BsSearch style={styles.searchIcon} />
+        {/* <BsSearch style={styles.searchIcon} /> */}
         <TextInput
           style={styles.searchInput}
           placeholder="Search..."
@@ -76,7 +77,7 @@ const HistoryScreen: React.FC = () => {
           onChangeText={handleSearch}
         />
         <TouchableOpacity style={styles.filterButton}>
-          <BsFilter style={styles.filterIcon} />
+          {/* <BsFilter style={styles.filterIcon} /> */}
         </TouchableOpacity>
       </View>
       <ScrollView>

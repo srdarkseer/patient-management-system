@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import Assessment from "../components/Assessment";
 
 const AssessmentStepper: React.FC<{ navigation: any }> = ({ navigation }) => {
   const data = {
@@ -50,12 +51,7 @@ const AssessmentStepper: React.FC<{ navigation: any }> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Assessment")}
-        >
-          <Text style={styles.buttonText}>Start Assessment</Text>
-        </TouchableOpacity>
+        <Assessment />
       </ScrollView>
     </SafeAreaView>
   );

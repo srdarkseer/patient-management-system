@@ -20,15 +20,10 @@ export default function RootLayout() {
         */}
       <Stack
         screenOptions={{
-          headerStyle: {
-            backgroundColor: "#f472b6",
-          },
-          contentStyle: {
-            backgroundColor: colorScheme == "dark" ? "#fff" : "#000",
-          },
+          headerShown: false
         }}
       />
-      <StatusBar />
+      {/* <StatusBar /> */}
     </TRPCProvider>
   );
 }

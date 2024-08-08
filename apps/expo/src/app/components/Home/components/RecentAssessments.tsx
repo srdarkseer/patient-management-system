@@ -1,6 +1,5 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { BsArrowRight } from "react-icons/bs";
 
 interface RecentAssessmentsProps {
   data: any[];
@@ -11,9 +10,7 @@ const RecentAssessments: React.FC<RecentAssessmentsProps> = ({ data }) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Recent Assessments</Text>
-        <Text style={styles.linkText}>
-          See more <BsArrowRight />
-        </Text>
+        <Text style={styles.linkText}>See more</Text>
       </View>
       <FlatList
         data={data}

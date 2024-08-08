@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { BsArrowRight } from "react-icons/bs";
+// import { BsArrowRight } from "react-icons/bs";
 
 interface RecentHistoryProps {
   data: any[];
@@ -12,7 +12,8 @@ const RecentHistory: React.FC<RecentHistoryProps> = ({ data }) => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Recent History</Text>
         <Text style={styles.linkText}>
-          See more <BsArrowRight />
+          See more 
+          {/* <BsArrowRight /> */}
         </Text>
       </View>
       <FlatList

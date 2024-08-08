@@ -3,9 +3,8 @@ import { Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-//----------Screens----------//
+import HomeStackNavigator from "./HomeStackNavigator"; // Ensure the path is correct
 import HistoryScreen from "./screens/HistoryScreen";
-import HomeScreen from "./screens/HomeScreen";
 import PatientsScreen from "./screens/PatientsScreen";
 import SettingScreen from "./screens/SettingScreen";
 
@@ -45,9 +44,10 @@ function MyTabs() {
         },
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
+        headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeStackNavigator} />
       <Tab.Screen name="Patients" component={PatientsScreen} />
       <Tab.Screen name="History" component={HistoryScreen} />
       <Tab.Screen name="Settings" component={SettingScreen} />
